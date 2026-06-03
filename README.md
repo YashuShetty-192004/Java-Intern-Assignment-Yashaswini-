@@ -174,3 +174,149 @@ Create indexes on:
 - status
 
 ---
+Q4: How To Run Locally
+
+Prerequisites
+
+- Java 17
+- Maven 3.8+
+
+Run Application
+
+mvn spring-boot:run
+
+Application URL
+
+http://localhost:8080
+
+H2 Console
+
+http://localhost:8080/h2-console
+
+JDBC URL
+
+jdbc:h2:mem:tekraviodb
+
+Username
+
+sa
+
+Password
+
+password
+
+---
+
+Q5: Resources Used
+
+- Official Spring Boot Documentation
+- Spring Data JPA Documentation
+- Baeldung Tutorials
+- Stack Overflow Discussions
+- Tekravio Assignment Instructions
+
+All implementation decisions were completed by me. External resources were used for learning, syntax reference and best practices.
+
+---
+
+Validation & Exception Handling
+
+Validation
+
+- @NotNull
+- @NotBlank
+- @Email
+- @Size
+
+Custom Exceptions
+
+- ResourceNotFoundException
+- InvalidStatusTransitionException
+- EngineerNotAvailableException
+
+Business Rules
+
+Engineer Availability
+
+An engineer marked unavailable cannot be assigned to a task.
+
+Task Status Flow
+
+TODO → IN_PROGRESS → REVIEW → DONE
+
+Backward transitions are rejected.
+
+---
+
+Sprint Intelligence APIs
+
+Sprint Summary API
+
+GET /api/sprints/{id}/summary
+
+Returns:
+
+- Total tasks
+- Completed percentage
+- Average completion time
+- Tasks by priority
+- Overdue task count
+
+Engineer Workload API
+
+GET /api/engineers/{id}/workload
+
+Returns:
+
+- Active tasks
+- Tasks by status
+- Estimated hours
+- Actual hours
+
+Project Health API
+
+GET /api/projects/{id}/health
+
+Health Score Formula:
+
+(70% × Sprint Completion Rate) + (30% × Overdue Task Factor)
+
+Available Engineers API
+
+GET /api/engineers/available?stack=JAVA
+
+Returns engineers who:
+
+- Are available
+- Match requested technology stack
+- Have fewer than three active tasks
+
+---
+
+Testing
+
+Unit Testing
+
+- JUnit 5
+- Mockito
+
+Integration Testing
+
+- SpringBootTest
+- MockMvc
+
+Coverage Goal
+
+Minimum 60% service layer coverage.
+
+---
+
+Future Improvements
+
+If given one additional week, I would:
+
+1. Implement JWT Authentication
+2. Add Redis Caching
+3. Increase Test Coverage
+4. Dockerize the Application
+5. Configure CI/CD using GitHub Actions
