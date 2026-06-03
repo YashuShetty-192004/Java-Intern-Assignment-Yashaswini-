@@ -83,3 +83,94 @@ The application follows a layered architecture:
 - Exception Handling Layer
 
 Business logic is kept in the service layer and not inside controllers.
+
+---
+
+Q2: REST API Design
+
+Client APIs
+
+- POST /api/clients
+- GET /api/clients
+- GET /api/clients/{id}
+- PUT /api/clients/{id}
+- DELETE /api/clients/{id}
+
+Project APIs
+
+- POST /api/projects
+- GET /api/projects/{id}
+- GET /api/projects/{id}/sprints
+
+Sprint APIs
+
+- POST /api/sprints
+- GET /api/sprints/{id}
+- GET /api/sprints/{id}/summary
+
+Task APIs
+
+- POST /api/sprints/{id}/tasks
+- PUT /api/tasks/{id}/status
+- PUT /api/tasks/{id}/assign/{engineerId}
+
+Engineer APIs
+
+- GET /api/engineers/{id}/workload
+- GET /api/engineers/available
+
+Additional Features
+
+- DTO based request and response handling
+- Pagination support
+- Sorting support
+- Global exception handling
+- Soft delete support
+
+---
+
+Q3: What Would Break With 10,000 Projects?
+
+1. No Pagination
+
+Returning all projects at once could cause high memory consumption and slow API responses.
+
+Solution
+
+Use Spring Data Pageable and return paginated results.
+
+---
+
+2. N+1 Query Problem
+
+Improper lazy loading could generate hundreds of database queries.
+
+Solution
+
+Use EntityGraph or Join Fetch queries.
+
+---
+
+3. No Authentication
+
+Anyone could access sensitive endpoints.
+
+Solution
+
+Implement Spring Security and JWT authentication.
+
+---
+
+4. Missing Database Indexes
+
+Queries become slower as data grows.
+
+Solution
+
+Create indexes on:
+
+- client_id
+- project_id
+- status
+
+---
